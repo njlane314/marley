@@ -23,6 +23,7 @@
 // MARLEY includes
 #include "marley/Parity.hh"
 #include "marley/Particle.hh"
+#include "marley/Level.hh"
 
 namespace marley {
 
@@ -128,6 +129,10 @@ namespace marley {
       /// @brief Get a non-const reference to the vector of final particles
       inline std::vector<marley::Particle*>& get_final_particles();
 
+      inline const std::vector<marley::Level*>& get_cascade_levels() const;
+
+      inline std::vector<marley::Level*>& get_cascade_levels();
+
       /// @brief Returns the number of initial particles in the Event
       inline size_t initial_particle_count() const;
 
@@ -148,6 +153,8 @@ namespace marley {
       /// equal to the size of the vector of final particles
       inline const marley::Particle& final_particle( size_t idx ) const;
 
+      inline const marley::Level& cascade_level( size_t idx ) const;
+
       /// @brief Get the excitation energy of the residue just after the
       /// initial two-body reaction
       inline double Ex() const;
@@ -165,6 +172,8 @@ namespace marley {
 
       /// @brief Add a Particle to the vector of final particles
       void add_final_particle(const marley::Particle& p);
+
+      void add_cascade_level(const marley::Level& l);
 
       /// @brief Write a
       /// <a href="http://home.fnal.gov/~mrenna/lutp0613man2/node49.html">
@@ -242,6 +251,8 @@ namespace marley {
       /// @brief Vector of pointers to each of the final state particles
       std::vector<marley::Particle*> final_particles_;
 
+      std::vector<marley::Level*> cascade_levels_;
+
       /// @brief Excitation energy (MeV) of the residue immediately after the
       /// two-two scattering reaction
       /// @note The Ex_ class member is always zero for residues that have no
@@ -289,6 +300,12 @@ namespace marley {
 
   inline std::vector<marley::Particle*>& Event::get_final_particles()
     { return final_particles_; }
+
+  inline const std::vector<marley::Level*>& Event::get_cascade_levels()
+    const { return cascade_levels_; }
+  
+  inline std::vector<marley::Level*>& Event::get_cascade_levels()
+    { return cascade_levels_; }
 
   inline size_t Event::initial_particle_count() const
     { return initial_particles_.size(); }

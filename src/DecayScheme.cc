@@ -105,6 +105,8 @@ void marley::DecayScheme::do_cascade(marley::Level& initial_level,
       // post-gamma-emission mass.
       double Exf = p_current_level->energy();
 
+      event.add_cascade_level(*p_gamma->start_level());
+
       // Create new particle objects to represent the emitted gamma and
       // recoiling nucleus
       marley::Particle gamma(marley_utils::PHOTON, 0);

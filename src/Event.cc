@@ -209,6 +209,11 @@ void marley::Event::add_final_particle(const marley::Particle& p)
   final_particles_.push_back(new marley::Particle(p));
 }
 
+void marley::Event::add_cascade_level(const marley::Level& l)
+{
+  cascade_levels_.push_back(new marley::Level(l));
+}
+
 void marley::Event::clear() {
   this->delete_particles();
   Ex_ = 0.;
